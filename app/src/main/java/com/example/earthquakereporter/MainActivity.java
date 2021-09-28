@@ -14,7 +14,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String INTERNET_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&eventtype=earthquake&orderby=time&minmag=5&limit=20";
+    private static final String INTERNET_URL =
+            "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&eventtype=earthquake&orderby=time&minmag=4&limit=20";
 
     private static final int LOADER_ID = 1;
     private ListView earthquakeListView;
@@ -44,10 +45,19 @@ public class MainActivity extends AppCompatActivity {
 
         //item click listener to open the url into the requested site
         earthquakeListView.setOnItemClickListener((parent, view, position, id) -> {
-            String url = "https://earthquake.usgs.gov/earthquakes/eventpage/us20004vvx/executive";
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(url));
-            startActivity(intent);
+            Intent intent = new Intent(MainActivity.this,CompleteActivity.class);
+
+            ListAdapter list=new ListAdapter(this,new ArrayList<DataModel>());
+                   DataModel dataModel=task.data.get(position);
+                   String mag=dataModel.getMagnitude().trim();
+                   String title=dataModel.getPlace().trim();
+                   String felt=dataModel.getFelt().trim();
+                   int color=list.getMagnitudeColor(mag);
+                   intent.putExtra("color",color);
+                   intent.putExtra("felt",felt);
+                   intent.putExtra("magnitude",mag);
+                   intent.putExtra("title",title);
+                   startActivity(intent);
         });
     }
 
@@ -69,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
             data = QueryUtils.fetchEarthQuakeData(urls[0]);
-
             return data;
         }
 

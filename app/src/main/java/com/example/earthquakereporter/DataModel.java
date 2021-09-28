@@ -5,12 +5,22 @@ public class DataModel {
     private String date;
     private String time;
     private String magnitude;
+    private String felt;
 
-    public DataModel(String place, String date, String magnitude,String time) {
+    public DataModel(String place, String date, String magnitude,String time,String felt) {
         this.place = place;
         this.date = date;
         this.magnitude = magnitude;
         this.time=time;
+        this.felt=felt;
+    }
+
+    public String getFelt() {
+        return felt;
+    }
+
+    public void setFelt(String felt) {
+        this.felt = felt;
     }
 
     public String getTime() {

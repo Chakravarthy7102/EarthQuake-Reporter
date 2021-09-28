@@ -134,6 +134,8 @@ public final class QueryUtils {
 
                 String place=properties1.getString("place");
                 String time=properties1.getString("time");
+                String felt=properties1.getString("felt");
+                String url=properties1.getString("url");
                 //now splitting the given place string into two different categories ie., into main place and a radius location
 
                 //formatting the unix epoch timeStamp to Standard time and date
@@ -145,7 +147,7 @@ public final class QueryUtils {
                 //formatting into appropriate time
 
                 String mag=properties1.getString("mag");
-                earthquakes.add(new DataModel(place,formattedDate,mag,time));
+                earthquakes.add(new DataModel(place,formattedDate,mag,time,felt));
 
             }
 

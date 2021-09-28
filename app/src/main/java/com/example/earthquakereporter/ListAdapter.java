@@ -61,7 +61,7 @@ public class ListAdapter extends ArrayAdapter<DataModel> {
         return view;
     }
 
-    private int getMagnitudeColor(String magnitude) {
+    public int getMagnitudeColor(String magnitude) {
 
         int backgroundColor;
         double doubleMag = Double.parseDouble(magnitude);
